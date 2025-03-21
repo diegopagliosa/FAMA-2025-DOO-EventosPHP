@@ -1,0 +1,4 @@
+Para subir o servidor php, abri o cmd na pasta do projeto e rodar o comando
+php -S localhost:8000 -t public
+
+esse comando subira o servidor web na porta 8000, e deixara apena a pasta public aberta na web para acesso

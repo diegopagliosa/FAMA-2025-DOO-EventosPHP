@@ -1,0 +1,16 @@
+{
+    "name": "diego/eventos-php",
+    "autoload": {
+        "psr-4": {
+            "EventosApp\\": "src/",
+            "EventosApp\\Controllers\\": "src/controllers/",
+            "EventosApp\\Models\\": "src/models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diego"
+        }
+    ],
+    "require": {}
+}
