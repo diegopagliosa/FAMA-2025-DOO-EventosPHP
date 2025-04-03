@@ -6,7 +6,8 @@ class EventoController
     public function retornaEventos()
     {
         if (isset($_GET["id_evento"])) {
-            $this->retornaEvento($_GET["id_evento"]);
+            $evento = $this->retornaEvento($_GET["id_evento"]);
+            echo json_encode($evento);
         } else {
             $this->retornaTodosEventos();
         }
@@ -18,13 +19,16 @@ class EventoController
         $evento = $obj->getById($id);
         if (!$evento) {
             http_response_code(404);
-            $evento = ["error" => "Evento Não encontrado"];
+            die(json_encode(["error" => "Evento Não encontrado"]));
         }
-        echo json_encode($evento);
+        return $evento;
     }
 
     public function retornaTodosEventos()
     {
+        /**
+         * por hora não, porém depois pode ter a listagem baseado no usuário
+         */
         $obj = new Evento();
         $lista = $obj->getAll();
         echo json_encode($lista);
@@ -34,15 +38,16 @@ class EventoController
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);
+        $this->validaEvento($objJson);
         $evento = new Evento();
         $evento->jsonToEvento($objJson);
+
         if ($evento->save($evento)) {
             http_response_code(201);
             echo json_encode($evento);
         } else {
-            echo "Erro ao gravar os dados";
             http_response_code(400);
-            exit;
+            die("Erro ao gravar os dados");
         }
     }
 
@@ -50,10 +55,15 @@ class EventoController
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);
-        if (!isset($objJson->nome) || strlen($objJson->nome) < 1) {
+
+        $eventoById = $this->retornaEvento($objJson->id_evento);
+        $data_hoje = date('Y-m-d');
+        if ($eventoById->data_evento <= $data_hoje) {
             http_response_code(400);
-            die('{"erro": "Nome do Evento não informado"}');
+            die('{"erro": "Evento não pode ser atualizado, pois já passou a sua data."}');
         }
+
+        $this->validaEvento($objJson);
         $evento = new Evento();
         $evento->jsonToEvento($objJson);
         if ($evento->update($evento)) {
@@ -70,6 +80,42 @@ class EventoController
     {
         if (isset($_GET["id_evento"])) {
             Evento::delete($_GET["id_evento"]);
+        }
+    }
+
+    private function validaEvento($objJson)
+    {
+        if (!isset($objJson->nome) || strlen($objJson->nome) < 5  || strlen($objJson->nome) > 100) {
+            http_response_code(400);
+            die('{"erro": "Nome do Evento não informado ou Tamanho inválido."}');
+        }
+
+        if (!isset($objJson->data_evento)) {
+            http_response_code(400);
+            die('{"erro": "Informe uma Data válida para o Evento."}');
+        }
+        $data_hoje = date('Y-m-d');
+        if ($objJson->data_evento <= $data_hoje) {
+            http_response_code(400);
+            die('{"erro": "Data informada deve Futura."}');
+        }
+        if (!isset($objJson->endereco) || strlen($objJson->endereco) < 5  || strlen($objJson->endereco) > 150) {
+            http_response_code(400);
+            die('{"erro": "Endereço do Evento não informado ou Tamanho inválido."}');
+        }
+
+        if (!isset($objJson->descricao) || strlen($objJson->descricao) < 15  || strlen($objJson->descricao) > 255) {
+            http_response_code(400);
+            die('{"erro": "Descrição do Evento não informado ou Tamanho inválido."}');
+        }
+
+        if (!isset($objJson->max_vagas)) {
+            http_response_code(400);
+            die('{"erro": "Informe uma número para o limite de vagas."}');
+        }
+        if ($objJson->max_vagas <= 1) {
+            http_response_code(400);
+            die('{"erro": "Evento deve ter ao menos duas vagas."}');
         }
     }
 }
