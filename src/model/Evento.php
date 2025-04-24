@@ -9,6 +9,7 @@ class Evento
     public $endereco;
     public $descricao;
     public $max_vagas;
+    public $user_id;
 
     /**
      * @param int $id_evento
@@ -22,7 +23,6 @@ class Evento
         if (!$conn) {
             die('Erro Ao conectar no banco de dados');
         }
-        $select = 'SELECT * from eventos where id_evento = ' . $id_evento;
         $select = "SELECT * from eventos where id_evento = {$id_evento}";
         $result = mysqli_query($conn, $select);
         if ($row = mysqli_fetch_assoc($result)) {
@@ -33,6 +33,7 @@ class Evento
             $evento->endereco = $row['endereco'];
             $evento->descricao = $row['descricao'];
             $evento->max_vagas = $row['max_vagas'];
+            $evento->user_id = $row['user_id'];
         }
         $conn->close();
         return $evento;
@@ -59,6 +60,7 @@ class Evento
             $evento->endereco = $row['endereco'];
             $evento->descricao = $row['descricao'];
             $evento->max_vagas = $row['max_vagas'];
+            $evento->user_id = $row['user_id'];
             $lista_eventos[] = $evento;
         }
         $conn->close();
@@ -75,16 +77,17 @@ class Evento
         if (!$conn) {
             die('Erro Ao conectar no banco de dados');
         }
-        $sql = "INSERT into eventos(nome, data_evento, endereco, descricao, max_vagas)
-         values(?, ?, ?, ?, ?)";
+        $sql = "INSERT into eventos(nome, data_evento, endereco, descricao, max_vagas, user_id)
+         values(?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
-            "ssssi",
+            "ssssii",
             $this->nome,
             $this->data_evento,
             $this->endereco,
             $this->descricao,
-            $this->max_vagas
+            $this->max_vagas,
+            $this->user_id
         );
         if ($stmt->execute()) {
             $this->id_evento = $conn->insert_id;

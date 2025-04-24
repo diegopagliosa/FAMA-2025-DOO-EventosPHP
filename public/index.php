@@ -5,6 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
 require_once(__DIR__ . '/../src/model/Evento.php');
+require_once(__DIR__ . '/../src/model/User.php');
 require_once(__DIR__ . '/../src/routes.php');
 require_once(__DIR__ . '/../src/model/Conexao.php');
 
