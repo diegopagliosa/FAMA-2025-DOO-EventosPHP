@@ -51,7 +51,7 @@ class UserController
         }
     }
 
-    public function atualizaEvento()
+    public function atualizaUser()
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);

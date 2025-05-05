@@ -18,5 +18,21 @@ $routes = [
         'metodo' => "excluiEvento"
     ],
 
+    "GET:user" => [
+        'controlador' => "UserController",
+        'metodo' => "retornaUser"
+    ],
+    "POST:user" => [
+        'controlador' => "UserController",
+        'metodo' => "gravaUser"
+    ],
+    "PUT:user" => [
+        'controlador' => "UserController",
+        'metodo' => "atualizaUser"
+    ],
+    "DELETE:user" => [
+        'controlador' => "UserController",
+        'metodo' => "excluiUser"
+    ],
 
 ];
