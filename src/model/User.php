@@ -24,7 +24,7 @@ class User{
             $user = new User();
             $user->id = $row['id'];
             $user->nome = $row['nome'];
-            $user->senha = $row['senha'];
+            //$user->senha = $row['senha'];
         }
         $conn->close();
         return $user;
@@ -47,7 +47,7 @@ class User{
             $user = new User();
             $user->id = $row['id'];
             $user->nome = $row['nome'];
-            $user->senha = $row['senha'];
+            //$user->senha = $row['senha'];
             $lista_users[] = $user;
         }
         $conn->close();
@@ -92,13 +92,12 @@ class User{
         if (!$conn) {
             die('Erro Ao conectar no banco de dados');
         }
-        $sql = "UPDATE users set nome=?, senha=?
+        $sql = "UPDATE users set nome=?
          where id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
-            "ssi",
+            "si",
             $this->nome,
-            $this->senha,
             $this->id
         );
         if ($stmt->execute()) {

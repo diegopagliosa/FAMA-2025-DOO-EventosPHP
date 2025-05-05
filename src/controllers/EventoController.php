@@ -15,6 +15,7 @@ class EventoController
 
     public function retornaEvento(int $id)
     {
+        sleep(2);
         $obj = new Evento();
         $evento = $obj->getById($id);
         if (!$evento) {
@@ -26,9 +27,6 @@ class EventoController
 
     public function retornaTodosEventos()
     {
-        /**
-         * por hora não, porém depois pode ter a listagem baseado no usuário
-         */
         $obj = new Evento();
         $lista = $obj->getAll();
         echo json_encode($lista);
