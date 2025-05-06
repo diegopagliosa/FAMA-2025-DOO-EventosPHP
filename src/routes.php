@@ -20,7 +20,7 @@ $routes = [
 
     "GET:user" => [
         'controlador' => "UserController",
-        'metodo' => "retornaUser"
+        'metodo' => "retornaUsuarios"
     ],
     "POST:user" => [
         'controlador' => "UserController",

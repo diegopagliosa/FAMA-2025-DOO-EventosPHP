@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "4f8d0359-bd81-4969-9f01-a1a5dee15813",
+		"_postman_id": "1d7c0434-b761-4420-9e0b-5d6c1f24c690",
 		"name": "FAMA 2025",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13598020",
-		"_collection_link": "https://galactic-sunset-381627.postman.co/workspace/46f1c7bb-97e4-4a8d-b347-e98aaa76a546/collection/13598020-4f8d0359-bd81-4969-9f01-a1a5dee15813?action=share&source=collection_link&creator=13598020"
+		"_collection_link": "https://galactic-sunset-381627.postman.co/workspace/SigaMatch-API~46f1c7bb-97e4-4a8d-b347-e98aaa76a546/collection/13598020-1d7c0434-b761-4420-9e0b-5d6c1f24c690?action=share&source=collection_link&creator=13598020"
 	},
 	"item": [
 		{
@@ -14,162 +14,320 @@
 					"name": "EventosPHP",
 					"item": [
 						{
-							"name": "Excluir",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "Eventos",
+							"item": [
+								{
+									"name": "Excluir",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos?id_evento=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											],
+											"query": [
+												{
+													"key": "id_evento",
+													"value": "6"
+												}
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8000/eventos?id_evento=6",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"eventos"
-									],
-									"query": [
-										{
-											"key": "id_evento",
-											"value": "6"
+								{
+									"name": "Buscar Todos",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
 										}
-									]
+									},
+									"response": []
+								},
+								{
+									"name": "Atualizar",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_evento\": 6,\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Incluir",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-04-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar 1",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos?id_evento=1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											],
+											"query": [
+												{
+													"key": "id_evento",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "Atualizar",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id_evento\": 6,\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "User",
+							"item": [
+								{
+									"name": "Excluir",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos?id_evento=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											],
+											"query": [
+												{
+													"key": "id_evento",
+													"value": "6"
+												}
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8000/eventos",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"eventos"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Incluir",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Buscar Todos",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8000/eventos",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"eventos"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Buscar 1",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Atualizar",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_evento\": 6,\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8000/eventos?id_evento=1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"eventos"
-									],
-									"query": [
-										{
-											"key": "id_evento",
-											"value": "1"
+								{
+									"name": "Incluir",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-04-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											]
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Buscar Todos",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:8000/eventos",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8000",
-									"path": [
-										"eventos"
-									]
+								{
+									"name": "Buscar 1",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "http://localhost:8000/eventos?id_evento=1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"eventos"
+											],
+											"query": [
+												{
+													"key": "id_evento",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				}

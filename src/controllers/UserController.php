@@ -5,7 +5,7 @@ class UserController
 
     public function retornaUsuarios()
     {
-        if (isset($_GET["id_evento"])) {
+        if (isset($_GET["id_user"])) {
             $user = $this->retornaUser($_GET["id_user"]);
             echo json_encode($user);
         } else {
