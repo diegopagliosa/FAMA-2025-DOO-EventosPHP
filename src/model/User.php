@@ -24,7 +24,7 @@ class User{
             $user = new User();
             $user->id = $row['id'];
             $user->nome = $row['nome'];
-            //$user->senha = $row['senha'];
+            $user->senha = $row['senha'];
         }
         $conn->close();
         return $user;

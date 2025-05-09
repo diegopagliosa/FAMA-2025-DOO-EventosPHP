@@ -14,6 +14,13 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 $key_request = $request_method . ':' . $request_uri;
 if (array_key_exists($key_request, $routes)) {
     $rota = $routes[$key_request];
+    $protegido = $rota['protegido'] ?? false;
+    $user = '';
+    if ($protegido) {
+        require_once(__DIR__ . '/../src/controllers/UserController.php');
+        $userController = new UserController();
+        $user = $userController->validaToken();
+    }
     if (file_exists(__DIR__ . '/../src/controllers/' . $rota['controlador']  . '.php')) {
         require_once(__DIR__ . '/../src/controllers/' . $rota['controlador'] . '.php');
         $classe = $rota['controlador'];
@@ -21,7 +28,7 @@ if (array_key_exists($key_request, $routes)) {
             $controller = new $classe();
             $metodo = $rota['metodo'];
             if (method_exists($controller, $metodo)) {
-                $controller->$metodo();
+                $controller->$metodo($user);
             }
         }
     }

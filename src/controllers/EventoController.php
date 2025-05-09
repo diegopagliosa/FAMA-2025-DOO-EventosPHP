@@ -3,8 +3,9 @@
 class EventoController
 {
 
-    public function retornaEventos()
+    public function retornaEventos(User $user)
     {
+        error_log($user->id . ' - ' . $user->nome);
         if (isset($_GET["id_evento"])) {
             $evento = $this->retornaEvento($_GET["id_evento"]);
             echo json_encode($evento);
@@ -15,7 +16,6 @@ class EventoController
 
     public function retornaEvento(int $id)
     {
-        sleep(2);
         $obj = new Evento();
         $evento = $obj->getById($id);
         if (!$evento) {

@@ -2,11 +2,13 @@
 
 class UserController
 {
+    static $secret_key = "batatinha123";
 
     public function retornaUsuarios()
     {
         if (isset($_GET["id_user"])) {
             $user = $this->retornaUser($_GET["id_user"]);
+            unset($user->senha);
             echo json_encode($user);
         } else {
             $this->retornaTodosUsers();
@@ -21,7 +23,6 @@ class UserController
             http_response_code(404);
             die(json_encode(["error" => "User Não encontrado"]));
         }
-        unset($user->senha);
         return $user;
     }
 
@@ -81,5 +82,70 @@ class UserController
                 die("Usuário ainda tem Eventos Cadastrados.");
             }
         }
+    }
+
+
+    public function login()
+    {
+        $jsonEntrada = file_get_contents("php://input");
+        $obj = json_decode($jsonEntrada);
+        if (isset($obj->id_user) && isset($obj->senha)) {
+            $user = $this->retornaUser($obj->id_user);
+            if ($user->id > 0) {
+                if (password_verify($obj->senha, $user->senha)) {
+                    http_response_code(200);
+                    /**
+                     * gero o token
+                     */
+
+                    $header = json_encode(["alg" => "HS256", "typ" => "JWT"]);
+                    unset($user->senha);
+                    $payload = json_encode($user);
+                    $signature = hash_hmac(
+                        'sha256',
+                        $header . '.' . $payload,
+                        UserController::$secret_key,
+                        true
+                    );
+                    $header = base64_encode($header);
+                    $payload = base64_encode($payload);
+                    $signature = base64_encode($signature);
+                    $token = $header . '.' . $payload . '.' . $signature;
+                    die(json_encode(["token" => $token]));
+                }
+            }
+        }
+        http_response_code(401);
+        die("Login ou Senha Incorretos.");
+    }
+
+
+    public function validaToken()
+    {
+        $headers = getallheaders();
+        if (!isset($headers['Authorization'])) {
+            http_response_code(401);
+            die("Token Não encontrado");
+        }
+        $token = explode('.', $headers['Authorization']);
+        $header = base64_decode($token[0]);
+        $payload = base64_decode($token[1]);
+        $signature = base64_decode($token[2]);
+        $header_payload = $header . '.' . $payload;
+
+        if (
+            hash_hmac('sha256', $header_payload, UserController::$secret_key, true)
+            !== $signature
+        ) {
+            http_response_code(401);
+            die("Token Inválido");
+        }
+        $id_user = json_decode($payload)->id;
+        $user = $this->retornaUser($id_user);
+        if ($user->id <= 0) {
+            http_response_code(401);
+            die("Usuário Inválido.");
+        }
+        return $user;
     }
 }

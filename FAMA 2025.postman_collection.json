@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "1d7c0434-b761-4420-9e0b-5d6c1f24c690",
 		"name": "FAMA 2025",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "13598020",
 		"_collection_link": "https://galactic-sunset-381627.postman.co/workspace/SigaMatch-API~46f1c7bb-97e4-4a8d-b347-e98aaa76a546/collection/13598020-1d7c0434-b761-4420-9e0b-5d6c1f24c690?action=share&source=collection_link&creator=13598020"
 	},
@@ -67,17 +67,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/eventos"
 									},
 									"response": []
 								},
@@ -88,24 +78,14 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_evento\": 6,\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
+											"raw": "{\r\n    \"id_evento\": \"11\",\r\n    \"nome\": \"Teste do Postman\",\r\n    \"data_evento\": \"2025-06-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": \"2\",\r\n    \"user_id\": null\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/eventos"
 									},
 									"response": []
 								},
@@ -116,24 +96,14 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-04-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 1\r\n}",
+											"raw": "{\r\n    \"nome\": \"Teste do Poastman\",\r\n    \"data_evento\": \"2025-06-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 2\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/eventos"
 									},
 									"response": []
 								},
@@ -144,13 +114,19 @@
 									},
 									"request": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJub21lIjoiRGllZ28ifQ==.frJOx7z971TAxQ4+GoN6cU80/wjggkyy0cjcCds0vU8=",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "formdata",
 											"formdata": []
 										},
 										"url": {
-											"raw": "http://localhost:8000/eventos?id_evento=1",
+											"raw": "http://localhost:8000/eventos?id_evento=11",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -162,7 +138,7 @@
 											"query": [
 												{
 													"key": "id_evento",
-													"value": "1"
+													"value": "11"
 												}
 											]
 										}
@@ -189,19 +165,19 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/eventos?id_evento=6",
+											"raw": "http://localhost:8000/user?id_user=2",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8000",
 											"path": [
-												"eventos"
+												"user"
 											],
 											"query": [
 												{
-													"key": "id_evento",
-													"value": "6"
+													"key": "id_user",
+													"value": "2"
 												}
 											]
 										}
@@ -225,17 +201,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/user"
 									},
 									"response": []
 								},
@@ -246,24 +212,14 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_evento\": 6,\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-03-22\",\r\n    \"endereco\": \"Online via zoo\",\r\n    \"descricao\": \"Tanto faz, ninguem vai fazer mesmo, mas deveriam ter feito\",\r\n    \"max_vagas\": \"15\"\r\n}",
+											"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Usuario Dois\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/user"
 									},
 									"response": []
 								},
@@ -274,24 +230,14 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nome\": \"Aula 2do Sábado que ninguém fez\",\r\n    \"data_evento\": \"2025-04-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 1\r\n}",
+											"raw": "{\r\n    \"nome\": \"Usuario 2\",\r\n    \"senha\": \"123\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": {
-											"raw": "http://localhost:8000/eventos",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8000",
-											"path": [
-												"eventos"
-											]
-										}
+										"url": "http://localhost:8000/user"
 									},
 									"response": []
 								},
@@ -308,22 +254,40 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "http://localhost:8000/eventos?id_evento=1",
+											"raw": "http://localhost:8000/user?id_user=1",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
 											"port": "8000",
 											"path": [
-												"eventos"
+												"user"
 											],
 											"query": [
 												{
-													"key": "id_evento",
+													"key": "id_user",
 													"value": "1"
 												}
 											]
 										}
+									},
+									"response": []
+								},
+								{
+									"name": "Login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_user\": 1,\r\n    \"senha\": \"123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "http://localhost:8000/login"
 									},
 									"response": []
 								}
