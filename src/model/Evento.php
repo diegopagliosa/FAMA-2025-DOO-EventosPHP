@@ -109,7 +109,8 @@ class Evento
         if (!$conn) {
             die('Erro Ao conectar no banco de dados');
         }
-        $sql = "UPDATE eventos set nome=?, data_evento=?, endereco=?, descricao=?, max_vagas=?
+        $sql = "UPDATE eventos set nome=?, data_evento=?, 
+        endereco=?, descricao=?, max_vagas=?
          where id_evento = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(

@@ -3,9 +3,8 @@
 class EventoController
 {
 
-    public function retornaEventos(User $user)
+    public function retornaEventos()
     {
-        error_log($user->id . ' - ' . $user->nome);
         if (isset($_GET["id_evento"])) {
             $evento = $this->retornaEvento($_GET["id_evento"]);
             echo json_encode($evento);
@@ -32,14 +31,14 @@ class EventoController
         echo json_encode($lista);
     }
 
-    public function gravaEvento()
+    public function gravaEvento(User $user)
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);
         $this->validaEvento($objJson);
         $evento = new Evento();
         $evento->jsonToEvento($objJson);
-
+        $evento->user_id = $user->id;
         if ($evento->save($evento)) {
             http_response_code(201);
             echo json_encode($evento);
@@ -65,6 +64,7 @@ class EventoController
         $evento = new Evento();
         $evento->jsonToEvento($objJson);
         if ($evento->update($evento)) {
+            $evento = $evento->getById($evento->id_evento);
             echo json_encode($evento);
             http_response_code(202);
         } else {

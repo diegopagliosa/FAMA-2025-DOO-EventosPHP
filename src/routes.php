@@ -4,40 +4,48 @@ $routes = [
     "GET:eventos" => [
         'controlador' => "EventoController",
         'metodo' => "retornaEventos",
-        'protegido' => true
+        'protegido' => false
     ],
     "POST:eventos" => [
         'controlador' => "EventoController",
-        'metodo' => "gravaEvento"
+        'metodo' => "gravaEvento",
+        'protegido' => true
     ],
     "PUT:eventos" => [
         'controlador' => "EventoController",
-        'metodo' => "atualizaEvento"
+        'metodo' => "atualizaEvento",
+        'protegido' => true
     ],
     "DELETE:eventos" => [
         'controlador' => "EventoController",
-        'metodo' => "excluiEvento"
+        'metodo' => "excluiEvento",
+        'protegido' => true
     ],
 
     "GET:user" => [
         'controlador' => "UserController",
-        'metodo' => "retornaUsuarios"
+        'metodo' => "retornaUsuarios",
+        'protegido' => true
     ],
     "POST:user" => [
         'controlador' => "UserController",
-        'metodo' => "gravaUser"
+        'metodo' => "gravaUser",
+        'protegido' => true
     ],
     "PUT:user" => [
         'controlador' => "UserController",
-        'metodo' => "atualizaUser"
+        'metodo' => "atualizaUser",
+        'protegido' => true
     ],
     "DELETE:user" => [
         'controlador' => "UserController",
-        'metodo' => "excluiUser"
+        'metodo' => "excluiUser",
+        'protegido' => true
     ],
     "POST:login" => [
         'controlador' => "UserController",
-        'metodo' => 'login'
+        'metodo' => 'login',
+        'protegido' => false
     ]
 
 ];
