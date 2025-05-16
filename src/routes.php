@@ -6,6 +6,11 @@ $routes = [
         'metodo' => "retornaEventos",
         'protegido' => false
     ],
+    "GET:meusEventos" => [
+        'controlador' => "UserController",
+        'metodo' => "retornaEventos",
+        'protegido' => true
+    ],
     "POST:eventos" => [
         'controlador' => "EventoController",
         'metodo' => "gravaEvento",
@@ -30,7 +35,7 @@ $routes = [
     "POST:user" => [
         'controlador' => "UserController",
         'metodo' => "gravaUser",
-        'protegido' => true
+        'protegido' => false
     ],
     "PUT:user" => [
         'controlador' => "UserController",

@@ -48,18 +48,24 @@ class EventoController
         }
     }
 
-    public function atualizaEvento()
+    public function atualizaEvento(User $user)
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);
 
         $eventoById = $this->retornaEvento($objJson->id_evento);
+
+        if ($user->id != $eventoById->user_id) {
+            http_response_code(403);
+            die("Não é possivel atualizar um evento que não seja seu.");
+        }
+
+
         $data_hoje = date('Y-m-d');
         if ($eventoById->data_evento <= $data_hoje) {
             http_response_code(400);
             die('{"erro": "Evento não pode ser atualizado, pois já passou a sua data."}');
         }
-
         $this->validaEvento($objJson);
         $evento = new Evento();
         $evento->jsonToEvento($objJson);
@@ -74,10 +80,16 @@ class EventoController
         }
     }
 
-    public function excluiEvento()
+    public function excluiEvento(User $user)
     {
-        if (isset($_GET["id_evento"])) {
-            Evento::delete($_GET["id_evento"]);
+        $id_evento = $_GET["id_evento"];
+        if (isset($id_evento)) {
+            $eventoById = $this->retornaEvento($id_evento);
+            if ($user->id != $eventoById->user_id) {
+                http_response_code(403);
+                die("Não é possivel Excluir um evento que não seja seu.");
+            }
+            Evento::delete($id_evento);
         }
     }
 

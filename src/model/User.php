@@ -1,6 +1,7 @@
 <?php
 
-class User{
+class User
+{
 
     public $id;
     public $nome;
@@ -113,7 +114,7 @@ class User{
      * @param int $id
      * @return boolean
      */
-    public static function delete($id)
+    public function delete()
     {
         $conexao = new Conexao();
         $conn = $conexao->conecta();
@@ -125,7 +126,7 @@ class User{
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "i",
-            $id
+            $this->id
         );
         if ($stmt->execute()) {
             $conn->close();
@@ -149,6 +150,7 @@ class User{
             die('Erro Ao conectar no banco de dados');
         }
         $select = "SELECT * from eventos where user_id = {$this->id}";
+        error_log($select);
         $result = mysqli_query($conn, $select);
         while ($row = mysqli_fetch_assoc($result)) {
             $evento = new Evento();

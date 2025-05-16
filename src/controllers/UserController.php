@@ -52,15 +52,20 @@ class UserController
         }
     }
 
-    public function atualizaUser()
+    public function atualizaUser(User $user)
     {
         $jsonEntrada = file_get_contents("php://input");
         $objJson = json_decode($jsonEntrada);
-        $user = $this->retornaUser($objJson->id);
-        $user->nome = $objJson->nome;
-        if ($user->update()) {
-            unset($user->senha);
-            echo json_encode($user);
+        $userById = $this->retornaUser($objJson->id);
+
+        if ($userById->id != $user->id) {
+            http_response_code(403);
+            die("Não é possivel atualizar outro usuário que não seja ocê mesmo.");
+        }
+        $userById->nome = $objJson->nome;
+        if ($userById->update()) {
+            unset($userById->senha);
+            echo json_encode($userById);
             http_response_code(202);
         } else {
             echo "Erro ao Atualizar os dados";
@@ -70,17 +75,14 @@ class UserController
     }
 
 
-    public function excluiUser()
+    public function excluiUser(User $user)
     {
-        if (isset($_GET["id_user"])) {
-            $user = $this->retornaUser($_GET["id_user"]);
-            $eventos = $user->getEventos();
-            if (sizeof($eventos) == 0) {
-                User::delete($_GET["id_user"]);
-            } else {
-                http_response_code(400);
-                die("Usuário ainda tem Eventos Cadastrados.");
-            }
+        $eventos = $user->getEventos();
+        if (sizeof($eventos) == 0) {
+            $user->delete();
+        } else {
+            http_response_code(400);
+            die("Usuário ainda tem Eventos Cadastrados.");
         }
     }
 
@@ -147,5 +149,13 @@ class UserController
             die("Usuário Inválido.");
         }
         return $user;
+    }
+
+
+    public function retornaEventos(User $user)
+    {
+        error_log('123123');
+        $meusEventos = $user->getEventos();
+        echo json_encode($meusEventos);
     }
 }
