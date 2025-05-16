@@ -93,10 +93,16 @@
 									"name": "Incluir",
 									"request": {
 										"method": "POST",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJub21lIjoiVXN1YXJpbyAyIn0=.DCuRjqLXf65267GBQR0eEEr9Szf5EW3lRDWuuprYNSg=",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nome\": \"Teste do Poastman\",\r\n    \"data_evento\": \"2025-06-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 2\r\n}",
+											"raw": "{\r\n    \"nome\": \"Teste do TOken na Inclusão outro user\",\r\n    \"data_evento\": \"2025-06-04\",\r\n    \"endereco\": \"Rua LIberdade\",\r\n    \"descricao\": \"123456789012345\",\r\n    \"max_vagas\": 23\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -288,6 +294,33 @@
 											}
 										},
 										"url": "http://localhost:8000/login"
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar Eventos",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJub21lIjoiRGllZ28ifQ==.frJOx7z971TAxQ4+GoN6cU80/wjggkyy0cjcCds0vU8=",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "http://localhost:8000/meusEventos"
 									},
 									"response": []
 								}
